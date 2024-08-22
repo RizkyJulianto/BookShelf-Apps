@@ -3,7 +3,6 @@ const RENDER_EVENT = "render-books";
 const SAVED_EVENT = "saved-books";
 const STORAGE_KEY = "Book-Shelf";
 
-
 // Event untuk merender perubahan pada element buku
 document.addEventListener(RENDER_EVENT, function() {
     console.log(books);
@@ -97,18 +96,25 @@ function generateBooksObject(id,judul,deskripsi,baca,selesai) {
 
 // Menambahkan value dari form ke dalam object
 function addBooks() {
-    const title = document.getElementById('judul').value;
-    const deskripsi = document.getElementById('deskripsi').value;
-    const form = document.getElementById('form');
+    Swal.fire({
+        title: "Selamat !",
+        text: "Anda Berhasil menambahkan buku baru ",
+        confirmButtonColor: "#FF9800",
+        icon: "success"
+      }).then(() => {
+        const title = document.getElementById('judul').value;
+        const deskripsi = document.getElementById('deskripsi').value;
+        const form = document.getElementById('form');
+    
+        const generateID = generateId();
+        const booksObject = generateBooksObject(generateID,title,deskripsi,false,false);
+        books.push(booksObject);
+        form.reset();
 
-    const generateID = generateId();
-    const booksObject = generateBooksObject(generateID,title,deskripsi,false,false);
-    books.push(booksObject);
-
-    form.reset();
-
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
+        document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
+      });
+    
 }
 
 // Membuat card book
@@ -203,10 +209,17 @@ function tambahbacaan(bookId) {
 
     if(book == null) return;
 
-    book.baca = true;
-    document.dispatchEvent(new Event(RENDER_EVENT));
+    Swal.fire({
+        title: "Selamat Membaca!",
+        confirmButtonColor: "#FF9800",
+        icon: "success"
+      }).then(() => {
 
-    saveData();
+          book.baca = true;
+          document.dispatchEvent(new Event(RENDER_EVENT));
+      
+          saveData();
+      });
 
 }
 
@@ -215,12 +228,19 @@ function selesaibaca(bookId) {
     const book = findId(bookId);
 
     if(book == null)return;
-    book.selesai = true;
-    book.baca = false;
-
-    document.dispatchEvent(new Event(RENDER_EVENT));
-
-    saveData();
+    Swal.fire({
+        title: "Selamat !",
+        text: "Anda sudah menyelesaikan bacaan anda ",
+        confirmButtonColor: "#FF9800",
+        icon: "success"
+      }).then(() => {
+        
+        book.selesai = true;
+        book.baca = false;
+    
+        document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
+      });
 }
 
 // Menghapus buku
@@ -229,12 +249,31 @@ function hapusbuku(bookId) {
 
     if(buku == null)return;
 
-    if(confirm('Apakah anda yakin ingin menghapus buku')) {
+    Swal.fire({
+        title: "Yakin ingin hapus?",
+        text: "Kamu akan menghapus buku ini !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#FF9800",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, hapus!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            books.splice(buku,1);
+          document.dispatchEvent(new Event(RENDER_EVENT));
+          saveData();
 
-        books.splice(buku,1);
-        document.dispatchEvent(new Event(RENDER_EVENT));
-        saveData();
-    }
+          Swal.fire({
+            title: "Terhapus!",
+            text: "Berhasil menghapus Buku",
+            confirmButtonColor: "#FF9800",
+            icon: "success"
+          });
+        }
+      });
+
+     
+    
 }
 
 // Mengembalikan ke rak daftar buku
@@ -243,11 +282,19 @@ function kembalikerak(bookId) {
 
     if(buku == null)return;
 
-    buku.selesai = false;
-    buku.baca = false;
+    Swal.fire({
+        title: "Berhasil !",
+        text: "Mengembalikan buku kedalam rak",
+        confirmButtonColor: "#FF9800",
+        icon: "success"
+      }).then(() => {
 
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
+          buku.selesai = false;
+          buku.baca = false;
+      
+          document.dispatchEvent(new Event(RENDER_EVENT));
+          saveData();
+      });
 }
 
 // Melakukan set item di dalam localStorage berdasarkan object yang sudah dibuat dan di convert menjadi string
