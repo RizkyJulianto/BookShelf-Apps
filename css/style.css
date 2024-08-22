@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    height: 100vh;
+}
+
+header {
+    width: 100vw;
+    text-align: center;
+    padding: 1.3rem 2rem;
+    
+}
+ span {
+    color: #FF9800;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.container-header{
+    width: 100%;
+}
+
+.container-header ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-header ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+}
+
+.container-header ul li a:focus {
+    color: #FF9800 !important;
+}
+
+.container-header ul li a::after {
+    content: '';
+    width: 0;
+    transition: all 0.5s;
+    display: block;
+    background-color: #FF9800;
+    height: 3px;
+}
+
+.container-header ul li a:hover::after {
+    width: 80%;
+} 
+
+
+
+.container-left {
+    display: flex;
+    align-items: center;
+    flex-basis: 60%;
+    flex-direction: column;
+    box-shadow: 0 6px 6px 0 rgba(0,0, 4, 0.7) ; 
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    height: fit-content;
+}
+
+.container-left .container-col {
+    display: flex;
+    gap: 10px;  
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 1rem 1rem;
+}
+
+
+
+.container-left .container-col .container-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 100%;
+    justify-content: center;
+    box-shadow: 0 4px 6px 0 rgba(0,0, 4, 0.7);
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    margin-top: 20px; 
+    font-size: 0.8rem;
+    position: relative;
+}
+
+
+
+.container-left .container-col .container-button  {
+    padding: 0 1.5rem;
+    display: flex;
+    align-self: self-end;
+    position: absolute;
+}
+
+.container-left .container-col .container-button button {
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.btn-baca {
+    font-size: 1.2rem;
+}
+
+.btn-baca i {
+    margin-left: 5px;
+}
+
+.btn-baca:hover {
+    color: #FF9800;
+}
+
+.btn-selesai,.btn-hapus{
+    font-size: 2rem;
+}
+
+.btn-selesai:hover {
+    color: #FF9800;
+}
+
+.btn-tambah {
+    margin-right: 10px;
+    font-size: 2rem;
+}
+
+
+
+.btn-tambah:hover {
+    color: #FF9800;
+}
+
+.btn-hapus:hover {
+    color: #FF9800;
+}
+
+.book-hidden{
+   display: none;
+}
+
+
+/* container right */
+.container-right {
+    display: flex;
+    box-shadow: 0 4px 6px 0 rgba(0,0, 4, 0.7);
+    flex-direction: column;
+    height: fit-content;
+    width: 400px;
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.container-right-header h2 {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 1.4rem;
+}
+
+.container-right .container-right-col .container-right-content form{
+    width: 100%;
+    padding: 1rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.container-right .container-right-col .container-right-content input {
+    height: 50px;
+    border-radius: 5px;
+    padding: 1rem 1rem;
+    outline: none;
+}
+
+.container-right .container-right-col .container-right-content button {
+    border: 3px dashed gray;
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: gray;
+    border-radius: 5px;
+    margin-top: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+@media(max-width: 768px){
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+
+
+    .container-right{
+        width: 570px;
+
+    }
+
+    .container-left {
+        width: 570px;
+        min-height: 80px;
+        margin-bottom: 50px;
+    }
+}
+
+@media(max-width: 610px) {
+     .container-header ul li{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container-header ul li a{
+        font-size: 1rem;
+    }
+
+    .container-right {
+        width: 500px;
+    }
+
+    .container-left {
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(max-width: 450px) {
+    .container-left,.container-right {
+        width: 360px;
+    }
+}
